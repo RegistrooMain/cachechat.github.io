@@ -7,6 +7,7 @@
   let supabase = null;
   let currentSession = null;
   let messagesSubscription = null;
+  let messagesInterval = null;
 
   // ===== Init =====
   function init() {
@@ -206,8 +207,16 @@
     document.getElementById('chat-with').textContent = other === 'Ожидание...' ? 'Чат' : 'Чат с ' + other;
     document.getElementById('chat-status').textContent = other === 'Ожидание...' ? 'Ждём собеседника' : '';
 
+    // Загрузить историю и подписаться на обновления
     loadMessages();
     subscribeMessages();
+
+    // Резервный вариант: периодически опрашивать сервер,
+    // чтобы сообщения приходили даже если Realtime не настроен.
+    if (messagesInterval) {
+      clearInterval(messagesInterval);
+    }
+    messagesInterval = setInterval(loadMessages, 2500);
     showScreen('chat');
 
     document.getElementById('message-input').focus();

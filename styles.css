@@ -177,7 +177,12 @@ input::placeholder { color: var(--text-muted); opacity: 0.7; }
 }
 
 .action-icon { font-size: 1.75rem; margin-bottom: 0.75rem; }
-.action-card h3 { font-family: var(--font-display); font-size: 1.1rem; margin-bottom: 0.25rem; }
+.action-card h3 {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  margin-bottom: 0.25rem;
+  color: var(--text);
+}
 .action-card p { color: var(--text-muted); font-size: 0.9rem; line-height: 1.4; }
 
 /* ===== Key display ===== */

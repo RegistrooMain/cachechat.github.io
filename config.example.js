@@ -1,7 +1,5 @@
-// Скопируйте этот файл в config.js и заполните своими данными
-// Бесплатно: https://supabase.com — создайте проект и возьмите URL + anon key
-
+// Замените значения на свои из Supabase (Dashboard → Settings → API)
 window.APP_CONFIG = {
-  supabaseUrl: 'https://ВАШ_ПРОЕКТ.supabase.co',
-  supabaseAnonKey: 'ВАШ_ANON_KEY'
+  supabaseUrl: 'https://cezqgjjxzdtsdxzssvwd.supabase.co',
+  supabaseAnonKey: 'sb_publishable_e6JORZAFIvzG0rggBfTV2g_lZMvXjN8'
 };
