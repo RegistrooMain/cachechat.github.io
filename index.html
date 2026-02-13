@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#0a0a0f">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>XD Messenger</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="app">
+    <!-- Экран приветствия -->
+    <section id="screen-welcome" class="screen active">
+      <div class="welcome-content">
+        <div class="logo">
+          <span class="logo-icon">◆</span>
+          <h1>XD Messenger</h1>
+        </div>
+        <p class="tagline">Безопасный чат по одноразовому ключу</p>
+        <div class="welcome-actions">
+          <button id="btn-start" class="btn btn-primary btn-lg">Начать</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Экран входа (аккаунт) -->
+    <section id="screen-account" class="screen">
+      <div class="screen-header">
+        <button class="btn-back" data-back="welcome" aria-label="Назад">←</button>
+        <h2>Ваш аккаунт</h2>
+      </div>
+      <div class="screen-body">
+        <p class="hint">Придумайте имя для себя. Его увидит собеседник.</p>
+        <input type="text" id="input-account" placeholder="Моё имя" maxlength="30" autocomplete="off">
+        <button id="btn-continue" class="btn btn-primary btn-block">Продолжить</button>
+      </div>
+    </section>
+
+    <!-- Главный экран (создать / присоединиться) -->
+    <section id="screen-main" class="screen">
+      <div class="screen-header">
+        <h2>Привет, <span id="current-account"></span></h2>
+        <button id="btn-logout" class="btn-ghost">Выйти</button>
+      </div>
+      <div class="screen-body">
+        <div id="continue-chat-wrap" class="continue-wrap" style="display:none">
+          <button id="btn-continue-chat" class="btn btn-ghost btn-block" style="margin-bottom:1rem">↩ Продолжить чат</button>
+        </div>
+        <div class="main-actions">
+          <button id="btn-create-chat" class="action-card">
+            <span class="action-icon">🔑</span>
+            <h3>Создать чат</h3>
+            <p>Получите ключ и поделитесь им с собеседником</p>
+          </button>
+          <button id="btn-join-chat" class="action-card">
+            <span class="action-icon">🔗</span>
+            <h3>Присоединиться</h3>
+            <p>Введите ключ и аккаунт собеседника</p>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Создание чата — показать ключ -->
+    <section id="screen-created" class="screen">
+      <div class="screen-header">
+        <button class="btn-back" data-back="main" aria-label="Назад">←</button>
+        <h2>Чат создан</h2>
+      </div>
+      <div class="screen-body">
+        <p class="hint">Отправьте собеседнику:</p>
+        <div class="key-display">
+          <div class="key-row">
+            <span class="key-label">Аккаунт:</span>
+            <code id="share-account"></code>
+            <button class="btn-copy" data-copy="account">Копировать</button>
+          </div>
+          <div class="key-row">
+            <span class="key-label">Ключ:</span>
+            <code id="share-key"></code>
+            <button class="btn-copy" data-copy="key">Копировать</button>
+          </div>
+        </div>
+        <p class="key-note">⚠️ Ключ одноразовый. После подключения он не понадобится.</p>
+        <button id="btn-open-created-chat" class="btn btn-primary btn-block">Открыть чат</button>
+      </div>
+    </section>
+
+    <!-- Присоединение к чату -->
+    <section id="screen-join" class="screen">
+      <div class="screen-header">
+        <button class="btn-back" data-back="main" aria-label="Назад">←</button>
+        <h2>Присоединиться</h2>
+      </div>
+      <div class="screen-body">
+        <p class="hint">Введите данные от собеседника:</p>
+        <input type="text" id="input-join-account" placeholder="Аккаунт собеседника" autocomplete="off">
+        <input type="text" id="input-join-key" placeholder="Одноразовый ключ" autocomplete="off">
+        <button id="btn-do-join" class="btn btn-primary btn-block">Войти в чат</button>
+      </div>
+    </section>
+
+    <!-- Экран чата -->
+    <section id="screen-chat" class="screen">
+      <div class="chat-header">
+        <button class="btn-back" data-back="main" aria-label="Назад">←</button>
+        <div class="chat-info">
+          <h3 id="chat-with">Чат</h3>
+          <span id="chat-status" class="status"></span>
+        </div>
+      </div>
+      <div id="messages-container" class="messages-container">
+        <div id="messages-list" class="messages-list"></div>
+      </div>
+      <div class="chat-input-wrap">
+        <input type="text" id="message-input" placeholder="Сообщение..." maxlength="1000" autocomplete="off">
+        <button id="btn-send" class="btn-send" aria-label="Отправить">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
+          </svg>
+        </button>
+      </div>
+    </section>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
